@@ -1,0 +1,400 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Lenovo> mysql -u root -p
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.5.16 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| anudip             |
+| collegedb          |
+| mysql              |
+| performance_schema |
+| ram                |
+| temp1              |
+| temp2              |
+| test               |
++--------------------+
+9 rows in set (0.08 sec)
+
+mysql> create table emp1(eid int not null, ename varchar(23), esal int, department varchar(45));
+ERROR 1046 (3D000): No database selected
+mysql> use anudip;
+Database changed
+mysql> create table emp1(eid int not null, ename varchar(23), esal int, department varchar(45));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into emp1 values(1, "gopal",45000,"IT");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp1 values(2, "gopika", 43000, "MArketing"), (3,"jigra", 3000,"IT");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into emp1 values(5,"garima",35000,"IT"),(15,"grishma",50000,"admin"),(15,"grishma",50000,"HR"),(16,"gulu",45000,"Finance"),(17,"darwin",40000,"finanace");
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select* from emp1;
++-----+---------+-------+------------+
+| eid | ename   | esal  | department |
++-----+---------+-------+------------+
+|   1 | gopal   | 45000 | IT         |
+|   2 | gopika  | 43000 | MArketing  |
+|   3 | jigra   |  3000 | IT         |
+|   5 | garima  | 35000 | IT         |
+|  15 | grishma | 50000 | admin      |
+|  15 | grishma | 50000 | HR         |
+|  16 | gulu    | 45000 | Finance    |
+|  17 | darwin  | 40000 | finanace   |
++-----+---------+-------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select max(esal) from emp1;
++-----------+
+| max(esal) |
++-----------+
+|     50000 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select min(esal) from emp1;
++-----------+
+| min(esal) |
++-----------+
+|      3000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(esal) from emp1;
++------------+
+| avg(esal)  |
++------------+
+| 38875.0000 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select sum(esal) from emp1;
++-----------+
+| sum(esal) |
++-----------+
+|    311000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select count(esal) from emp1;
++-------------+
+| count(esal) |
++-------------+
+|           8 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(esal) AS MIN_SALARY from emp1;
++------------+
+| MIN_SALARY |
++------------+
+| 38875.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(esal) AS MIN_SALARY from emp1;
++------------+
+| MIN_SALARY |
++------------+
+|     311000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(esal) AS MIN_SALARY from emp1;
++------------+
+| MIN_SALARY |
++------------+
+|          8 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(esal) AS MIN_SALARY from emp1;
++------------+
+| MIN_SALARY |
++------------+
+|       3000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(esal) AS MIN_SALARY from emp1;
++------------+
+| MIN_SALARY |
++------------+
+|      50000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from emp1;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select max(esal) AS Dept from emp1;
++-------+
+| Dept  |
++-------+
+| 50000 |
++-------+
+1 row in set (0.01 sec)
+
+mysql> select ename, department, max(esal) AS Dept_wise_Sal from emp1 Group by Department;
++---------+------------+---------------+
+| ename   | department | Dept_wise_Sal |
++---------+------------+---------------+
+| grishma | admin      |         50000 |
+| darwin  | finanace   |         40000 |
+| gulu    | Finance    |         45000 |
+| grishma | HR         |         50000 |
+| gopal   | IT         |         45000 |
+| gopika  | MArketing  |         43000 |
++---------+------------+---------------+
+6 rows in set (0.01 sec)
+
+mysql> select max(esal) AS Dept_wise_Sal from emp1 Group by Department;
++---------------+
+| Dept_wise_Sal |
++---------------+
+|         50000 |
+|         40000 |
+|         45000 |
+|         50000 |
+|         45000 |
+|         43000 |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> create table stud(studentid int, name varchar(20), cource varchar(34), score int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into values(1,"raman","HIstory"67);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(1,"raman","HIstory"67)' at line 1
+mysql> insert into stud values(1,"raman","HIstory"67);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '67)' at line 1
+mysql> insert into stud values(1,"raman","HIstory"67);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '67)' at line 1
+mysql> insert into stud values(1, "raman", "History", 67);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into stud values(2, "man", "science", 75),(3,"ram","Computer",85),(4,"yash","Science",95),(5,"guri","Maths",60),(6,"harsh","marathi",50);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select*from stud;
++-----------+-------+----------+-------+
+| studentid | name  | cource   | score |
++-----------+-------+----------+-------+
+|         1 | raman | History  |    67 |
+|         2 | man   | science  |    75 |
+|         3 | ram   | Computer |    85 |
+|         4 | yash  | Science  |    95 |
+|         5 | guri  | Maths    |    60 |
+|         6 | harsh | marathi  |    50 |
++-----------+-------+----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into stud values(7, "gaurav", "Computer", 65),(8,"ravan","Computer",80),(9,"joki","Science",82),(10,"faran","Maths",65),(11,"komal","marathi",60),(12,"love","marathi"50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '50)' at line 1
+mysql> insert into stud values(7, "gaurav", "Computer", 65),(8,"ravan","Computer",80),(9,"joki","Science",82),(10,"faran","Maths",65),(11,"komal","marathi",60),(12,"love","marathi",50);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> selsect*from stud;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selsect*from stud' at line 1
+mysql> select*from stud;
++-----------+--------+----------+-------+
+| studentid | name   | cource   | score |
++-----------+--------+----------+-------+
+|         1 | raman  | History  |    67 |
+|         2 | man    | science  |    75 |
+|         3 | ram    | Computer |    85 |
+|         4 | yash   | Science  |    95 |
+|         5 | guri   | Maths    |    60 |
+|         6 | harsh  | marathi  |    50 |
+|         7 | gaurav | Computer |    65 |
+|         8 | ravan  | Computer |    80 |
+|         9 | joki   | Science  |    82 |
+|        10 | faran  | Maths    |    65 |
+|        11 | komal  | marathi  |    60 |
+|        12 | love   | marathi  |    50 |
++-----------+--------+----------+-------+
+12 rows in set (0.00 sec)
+
+mysql> select cource, avg(score) AS average_score from stud Group by cource;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |       76.6667 |
+| History  |       67.0000 |
+| marathi  |       53.3333 |
+| Maths    |       62.5000 |
+| science  |       84.0000 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select cource, sum(score) AS average_score from stud Group by cource;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |           230 |
+| History  |            67 |
+| marathi  |           160 |
+| Maths    |           125 |
+| science  |           252 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select cource, count(score) AS average_score from stud Group by cource;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |             3 |
+| History  |             1 |
+| marathi  |             3 |
+| Maths    |             2 |
+| science  |             3 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select cource, min(score) AS average_score from stud Group by cource;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |            65 |
+| History  |            67 |
+| marathi  |            50 |
+| Maths    |            60 |
+| science  |            75 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select cource, MAX(score) AS average_score from stud Group by cource;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |            85 |
+| History  |            67 |
+| marathi  |            60 |
+| Maths    |            65 |
+| science  |            95 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from stud ORDER BY score AESD;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AESD' at line 1
+mysql> select * from stud ORDER BY score DESD;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESD' at line 1
+mysql> select * from stud ORDER BY score DESC;
++-----------+--------+----------+-------+
+| studentid | name   | cource   | score |
++-----------+--------+----------+-------+
+|         4 | yash   | Science  |    95 |
+|         3 | ram    | Computer |    85 |
+|         9 | joki   | Science  |    82 |
+|         8 | ravan  | Computer |    80 |
+|         2 | man    | science  |    75 |
+|         1 | raman  | History  |    67 |
+|        10 | faran  | Maths    |    65 |
+|         7 | gaurav | Computer |    65 |
+|         5 | guri   | Maths    |    60 |
+|        11 | komal  | marathi  |    60 |
+|         6 | harsh  | marathi  |    50 |
+|        12 | love   | marathi  |    50 |
++-----------+--------+----------+-------+
+12 rows in set (0.00 sec)
+
+mysql> select * from stud ORDER BY score AESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AESC' at line 1
+mysql> select * from stud ORDER BY score ASEC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ASEC' at line 1
+mysql> select * from stud ORDER BY score ASC;
++-----------+--------+----------+-------+
+| studentid | name   | cource   | score |
++-----------+--------+----------+-------+
+|        12 | love   | marathi  |    50 |
+|         6 | harsh  | marathi  |    50 |
+|        11 | komal  | marathi  |    60 |
+|         5 | guri   | Maths    |    60 |
+|        10 | faran  | Maths    |    65 |
+|         7 | gaurav | Computer |    65 |
+|         1 | raman  | History  |    67 |
+|         2 | man    | science  |    75 |
+|         8 | ravan  | Computer |    80 |
+|         9 | joki   | Science  |    82 |
+|         3 | ram    | Computer |    85 |
+|         4 | yash   | Science  |    95 |
++-----------+--------+----------+-------+
+12 rows in set (0.00 sec)
+
+mysql> select course, avg(score) AS average_score from stud Group by cource Order by averge_score desc;
+ERROR 1054 (42S22): Unknown column 'course' in 'field list'
+mysql> select cource, avg(score) AS average_score from stud Group by cource Order by averge_score desc;
+ERROR 1054 (42S22): Unknown column 'averge_score' in 'order clause'
+mysql> SELECT course, AVG(score) AS average_score
+    -> FROM stud
+    -> GROUP BY course
+    -> ORDER BY average_score DESC;
+ERROR 1054 (42S22): Unknown column 'course' in 'field list'
+mysql> select cource, AVG(score) AS average_score from stud Group By cource Order by average_score DESC;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| science  |       84.0000 |
+| Computer |       76.6667 |
+| History  |       67.0000 |
+| Maths    |       62.5000 |
+| marathi  |       53.3333 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select cource , avg(score) AS average_score from stud group by cource having avg(score)>70;
++----------+---------------+
+| cource   | average_score |
++----------+---------------+
+| Computer |       76.6667 |
+| science  |       84.0000 |
++----------+---------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from stud;
++-----------+--------+----------+-------+
+| studentid | name   | cource   | score |
++-----------+--------+----------+-------+
+|         1 | raman  | History  |    67 |
+|         2 | man    | science  |    75 |
+|         3 | ram    | Computer |    85 |
+|         4 | yash   | Science  |    95 |
+|         5 | guri   | Maths    |    60 |
+|         6 | harsh  | marathi  |    50 |
+|         7 | gaurav | Computer |    65 |
+|         8 | ravan  | Computer |    80 |
+|         9 | joki   | Science  |    82 |
+|        10 | faran  | Maths    |    65 |
+|        11 | komal  | marathi  |    60 |
+|        12 | love   | marathi  |    50 |
++-----------+--------+----------+-------+
+12 rows in set (0.00 sec)
