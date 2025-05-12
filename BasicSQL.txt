@@ -1,0 +1,627 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Lenovo> mysql -u root -p
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 87
+Server version: 5.5.16 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| information_schema      |
+| anudip                  |
+| collegedb               |
+| mysql                   |
+| performance_schema      |
+| ram                     |
+| recent                  |
+| sample                  |
+| studentmanagementsystem |
+| temp1                   |
+| temp2                   |
+| test                    |
++-------------------------+
+12 rows in set (0.01 sec)
+
+mysql> use recent;
+Database changed
+mysql> create table emty(
+    -> id int primary key,
+    -> name varchar(50),
+    -> age int not null,
+    -> PhoneNo int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc emty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| PhoneNo | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into emty values(
+    -> (1, "Yash", 21, 104060
+    -> )(2,"joy", 20, 456123642),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(2,"joy", 20, 456123642),
+)' at line 3
+mysql> insert into emty values(
+    -> (1, "Yash", 21, 1040601020),
+    -> (2, "Joy", 51, 4012305879),
+    -> (3, "haush", 65, 4020301560),
+    -> (4, "Rahul", 40, 4050603210),
+    -> (5, "ram", 46,4020123115),
+    -> (6, "GK",56,401251632)
+    -> );
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> insert into emty values(
+    -> (1, "Yash", 21, 1040601020));
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> insert into emty values
+    -> (1, "Yash", 21, 1040601020),;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into emty values
+    -> (1, "Yash", 21, 1040601020);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emty values
+    -> (2, "Joy", 51, 4012305879),
+    -> (3, "haush", 65, 4020301560),
+    -> (4, "Rahul", 40, 4050603210),
+    -> (5, "ram", 46,4020123115),
+    -> (6, "GK",56,401251632)
+    -> ;
+ERROR 1264 (22003): Out of range value for column 'PhoneNo' at row 1
+mysql> insert into emty values
+    -> (2, "Joy", 51, 4012305879),
+    -> (3, "haush", 65, 4020301560),
+    -> (4, "Rahul", 40, 4050603210);
+ERROR 1264 (22003): Out of range value for column 'PhoneNo' at row 1
+mysql> select* from emty;
++----+------+-----+------------+
+| id | name | age | PhoneNo    |
++----+------+-----+------------+
+|  1 | Yash |  21 | 1040601020 |
++----+------+-----+------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE emty MODIFY PhoneNo BIGINT;
+Query OK, 1 row affected (0.05 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into emty values
+    -> (2, "Joy", 51, 4012305879),
+    -> (3, "haush", 65, 4020301560),
+    -> (4, "Rahul", 40, 4050603210);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into emty values
+    -> (5, "komal", 80, 1236478950),
+    -> (6,"long",40,12365478520),
+    -> (7, "fast", 60, 7894561230),
+    -> (8, "huta", 40,1456238795),
+    -> (9,"pouo",80,4569852312),
+    -> (10,"opue",70,7894561230);
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Joy   |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select PhoneNo from emty;
++-------------+
+| PhoneNo     |
++-------------+
+|  1040601020 |
+|  4012305879 |
+|  4020301560 |
+|  4050603210 |
+|  1236478950 |
+| 12365478520 |
+|  7894561230 |
+|  1456238795 |
+|  4569852312 |
+|  7894561230 |
++-------------+
+10 rows in set (0.00 sec)
+
+mysql> select* from emty where age < 18;
+Empty set (0.01 sec)
+
+mysql> select* from emty where age < 50;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  4 | Rahul |  40 |  4050603210 |
+|  6 | long  |  40 | 12365478520 |
+|  8 | huta  |  40 |  1456238795 |
++----+-------+-----+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select* from emty where age > 50;
++----+-------+-----+------------+
+| id | name  | age | PhoneNo    |
++----+-------+-----+------------+
+|  2 | Joy   |  51 | 4012305879 |
+|  3 | haush |  65 | 4020301560 |
+|  5 | komal |  80 | 1236478950 |
+|  7 | fast  |  60 | 7894561230 |
+|  9 | pouo  |  80 | 4569852312 |
+| 10 | opue  |  70 | 7894561230 |
++----+-------+-----+------------+
+6 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_recent |
++------------------+
+| emty             |
+| stu              |
+| stud             |
++------------------+
+3 rows in set (0.02 sec)
+
+mysql> select distinck age from emty ;
+ERROR 1054 (42S22): Unknown column 'distinck' in 'field list'
+mysql> select distinct age from emty ;
++-----+
+| age |
++-----+
+|  21 |
+|  51 |
+|  65 |
+|  40 |
+|  80 |
+|  60 |
+|  70 |
++-----+
+7 rows in set (0.01 sec)
+
+mysql> select * from emty where age > 60 limit 4;
++----+-------+-----+------------+
+| id | name  | age | PhoneNo    |
++----+-------+-----+------------+
+|  3 | haush |  65 | 4020301560 |
+|  5 | komal |  80 | 1236478950 |
+|  9 | pouo  |  80 | 4569852312 |
+| 10 | opue  |  70 | 7894561230 |
++----+-------+-----+------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Joy   |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select distinct age from emty;
++-----+
+| age |
++-----+
+|  21 |
+|  51 |
+|  65 |
+|  40 |
+|  80 |
+|  60 |
+|  70 |
++-----+
+7 rows in set (0.00 sec)
+
+mysql> select * from emty where age > 50 AND name = "pouo";
++----+------+-----+------------+
+| id | name | age | PhoneNo    |
++----+------+-----+------------+
+|  9 | pouo |  80 | 4569852312 |
++----+------+-----+------------+
+1 row in set (0.02 sec)
+
+mysql> select * from emty where age > 50 OR name = "pouo";
++----+-------+-----+------------+
+| id | name  | age | PhoneNo    |
++----+-------+-----+------------+
+|  2 | Joy   |  51 | 4012305879 |
+|  3 | haush |  65 | 4020301560 |
+|  5 | komal |  80 | 1236478950 |
+|  7 | fast  |  60 | 7894561230 |
+|  9 | pouo  |  80 | 4569852312 |
+| 10 | opue  |  70 | 7894561230 |
++----+-------+-----+------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from emty where age BETWEEN 60 AND 100;
++----+-------+-----+------------+
+| id | name  | age | PhoneNo    |
++----+-------+-----+------------+
+|  3 | haush |  65 | 4020301560 |
+|  5 | komal |  80 | 1236478950 |
+|  7 | fast  |  60 | 7894561230 |
+|  9 | pouo  |  80 | 4569852312 |
+| 10 | opue  |  70 | 7894561230 |
++----+-------+-----+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emty where age IN (40,80);
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
++----+-------+-----+-------------+
+5 rows in set (0.02 sec)
+
+mysql> select * from emty where age NOT IN (40,80);
++----+-------+-----+------------+
+| id | name  | age | PhoneNo    |
++----+-------+-----+------------+
+|  1 | Yash  |  21 | 1040601020 |
+|  2 | Joy   |  51 | 4012305879 |
+|  3 | haush |  65 | 4020301560 |
+|  7 | fast  |  60 | 7894561230 |
+| 10 | opue  |  70 | 7894561230 |
++----+-------+-----+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * from emty ORDER BY name AEC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AEC' at line 1
+mysql> SELECT * from emty ORDER BY name AESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AESC' at line 1
+mysql> SELECT * from emty ORDER BY name DESC;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  4 | Rahul |  40 |  4050603210 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
+|  6 | long  |  40 | 12365478520 |
+|  5 | komal |  80 |  1236478950 |
+|  2 | Joy   |  51 |  4012305879 |
+|  8 | huta  |  40 |  1456238795 |
+|  3 | haush |  65 |  4020301560 |
+|  7 | fast  |  60 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.08 sec)
+
+mysql> SELECT * from emty ORDER BY name asc;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  7 | fast  |  60 |  7894561230 |
+|  3 | haush |  65 |  4020301560 |
+|  8 | huta  |  40 |  1456238795 |
+|  2 | Joy   |  51 |  4012305879 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+| 10 | opue  |  70 |  7894561230 |
+|  9 | pouo  |  80 |  4569852312 |
+|  4 | Rahul |  40 |  4050603210 |
+|  1 | Yash  |  21 |  1040601020 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> desc emty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| PhoneNo | bigint(20)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql>  select count(age) from emty;
++------------+
+| count(age) |
++------------+
+|         10 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select count(name) from emty;
++-------------+
+| count(name) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(name) from emty;
++-----------+
+| avg(name) |
++-----------+
+|         0 |
++-----------+
+1 row in set, 10 warnings (0.01 sec)
+
+mysql> select avg(age) from emty;
++----------+
+| avg(age) |
++----------+
+|  54.7000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(age) from emty;
++----------+
+| max(age) |
++----------+
+|       80 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select min(age) from emty;
++----------+
+| min(age) |
++----------+
+|       21 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(age) from emty;
++----------+
+| sum(age) |
++----------+
+|      547 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select age from emty GROUP BY age;
++-----+
+| age |
++-----+
+|  21 |
+|  40 |
+|  51 |
+|  60 |
+|  65 |
+|  70 |
+|  80 |
++-----+
+7 rows in set (0.00 sec)
+
+mysql> select name from student GROUP BY  name;
+ERROR 1146 (42S02): Table 'recent.student' doesn't exist
+mysql> select name from emty GROUP BY  name;
++-------+
+| name  |
++-------+
+| fast  |
+| haush |
+| huta  |
+| Joy   |
+| komal |
+| long  |
+| opue  |
+| pouo  |
+| Rahul |
+| Yash  |
++-------+
+10 rows in set (0.01 sec)
+
+mysql> select name, count(age) from emty group by name;
++-------+------------+
+| name  | count(age) |
++-------+------------+
+| fast  |          1 |
+| haush |          1 |
+| huta  |          1 |
+| Joy   |          1 |
+| komal |          1 |
+| long  |          1 |
+| opue  |          1 |
+| pouo  |          1 |
+| Rahul |          1 |
+| Yash  |          1 |
++-------+------------+
+10 rows in set (0.02 sec)
+
+mysql> select age from emty GROUP BY  age;
++-----+
+| age |
++-----+
+|  21 |
+|  40 |
+|  51 |
+|  60 |
+|  65 |
+|  70 |
+|  80 |
++-----+
+7 rows in set (0.00 sec)
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Joy   |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update emty SET name = "Joy" WHERE name = "kunal";
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select* from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Joy   |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update emty SET name = "Kunal" WHERE name = "Joy";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Kunal |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update empty SET age = 90 where id=2;
+ERROR 1146 (42S02): Table 'recent.empty' doesn't exist
+mysql> update empty SET age = 90 where age=51;
+ERROR 1146 (42S02): Table 'recent.empty' doesn't exist
+mysql> update emty SET age=51 where age = 90;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Kunal |  51 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update emty SET age=90 where age = 51;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Kunal |  90 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  40 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  40 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  40 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update emty SET age=51 where age = 40;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  2 | Kunal |  90 |  4012305879 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  51 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  51 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  51 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE FROM emty where age=90;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emty;
++----+-------+-----+-------------+
+| id | name  | age | PhoneNo     |
++----+-------+-----+-------------+
+|  1 | Yash  |  21 |  1040601020 |
+|  3 | haush |  65 |  4020301560 |
+|  4 | Rahul |  51 |  4050603210 |
+|  5 | komal |  80 |  1236478950 |
+|  6 | long  |  51 | 12365478520 |
+|  7 | fast  |  60 |  7894561230 |
+|  8 | huta  |  51 |  1456238795 |
+|  9 | pouo  |  80 |  4569852312 |
+| 10 | opue  |  70 |  7894561230 |
++----+-------+-----+-------------+
+9 rows in set (0.00 sec)
+
+mysql>
